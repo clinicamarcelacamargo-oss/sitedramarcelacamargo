@@ -1247,7 +1247,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
 @media (max-width: 640px) {
   .unidades       { padding: 64px 0; }
-  .unidades__grid { gap: 16px; }
+  .unidades__grid { grid-template-columns: 1fr; gap: 16px; max-width: 420px; }
   .unidade        { padding: 26px 22px; }
   .unidade__nome  { font-size: 1.2rem; }
 }
@@ -1848,7 +1848,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .hero__container {
     grid-template-columns: 1fr;
     text-align: center;
-    padding-top: 120px;
+    padding-top: 96px;
     padding-bottom: 32px;
     align-items: center;
     gap: 0;
@@ -1856,20 +1856,20 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   }
   .hero__image-wrap {
     order: -1;
-    height: 110vw;
-    max-height: 700px;
+    height: 92vw;
+    max-height: 560px;
     width: 100%;
-    padding-top: 16px;
-    margin-bottom: -16px;
-    margin-top: 220px;
+    padding-top: 8px;
+    margin-bottom: -8px;
+    margin-top: 24px;
   }
   .hero__image {
-    height: calc(100% - 16px);
+    height: calc(100% - 8px);
     width: auto;
     max-width: 100%;
     margin: 0 auto;
     animation: none;
-    transform: scale(1.45);
+    transform: scale(1.18);
     transform-origin: bottom center;
   }
   .hero__image-glow { width: 90%; height: 40%; }
@@ -1878,7 +1878,18 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .hero__eyebrow   { font-size: .7rem; }
   .hero__subtitle  { margin-left: auto; margin-right: auto; font-size: .95rem; }
   .hero__actions   { justify-content: center; }
-  .hero__stats     { justify-content: center; gap: 14px; }
+  .hero__stats     {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px;
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero__stat      { flex: 1 1 100%; min-width: 0; padding: 16px 18px; }
   .hero__bg::after { height: 60px; }
   .hero__scroll-indicator { display: none; }
 
@@ -1951,8 +1962,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .container { padding: 0 16px; }
 
   /* Hero */
-  .hero__image-wrap    { height: 94vw; max-height: 600px; padding-top: 20px; margin-bottom: -48px; }
-  .hero__image         { height: calc(100% - 20px); }
+  .hero__image-wrap    { height: 88vw; max-height: 470px; padding-top: 8px; margin-bottom: -24px; margin-top: 16px; }
+  .hero__image         { height: calc(100% - 8px); transform: scale(1.12); }
   .hero__title-intro   { font-size: 1.3rem; white-space: normal; }
   .hero__title em      { font-size: 2.6rem; }
   .hero__actions       { flex-direction: column; align-items: center; }
@@ -2128,6 +2139,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 body.unit-modal-open { overflow: hidden; }
 
 @media (max-width: 640px) {
+  .about__image-badge        { padding: 11px 18px 12px; gap: 4px; }
+  .about__image-badge strong { font-size: 1.5rem; }
+  .about__image-badge-label  { font-size: .6rem; letter-spacing: .06em; }
+  .about__image-badge-tag    { font-size: .5rem; padding: 3px 9px; }
+
   .unit-modal__box     { padding: 34px 20px 24px; }
   .unit-modal__title   { font-size: 1.2rem; }
   .unit-modal__options { grid-template-columns: 1fr; gap: 12px; }
