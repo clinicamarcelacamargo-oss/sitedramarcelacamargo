@@ -1903,8 +1903,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
   /* ── Hero: título à esquerda, foto à direita ── */
   .hero__container {
-    grid-template-columns: 0.82fr 1.18fr;
-    column-gap: 4px;
+    grid-template-columns: 1.02fr 0.98fr;
+    column-gap: 0;
     row-gap: 0;
     text-align: center;
     padding-top: 104px;
@@ -1926,10 +1926,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     padding-bottom: 8px;
   }
   .hero__title-img {
-    width: 118%;
-    max-width: 118%;
+    width: 136%;
+    max-width: 136%;
     max-height: none;
-    margin: 0 0 0 -14%;
+    margin: 0 -36% 0 -8%;
     animation: none;
   }
 
@@ -1946,9 +1946,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   }
   .hero__image {
     height: auto;
-    width: 134%;
-    max-width: 134%;
-    margin: 0 -17% 0 -17%;
+    width: 148%;
+    max-width: 148%;
+    margin: 0 -20% 0 -28%;
     animation: none;
     transform: none;
   }
@@ -2057,9 +2057,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .container { padding: 0 16px; }
 
   /* Hero */
-  .hero__container     { grid-template-columns: 0.8fr 1.2fr; padding-top: 96px; }
-  .hero__image         { width: 138%; max-width: 138%; margin: 0 -19%; }
-  .hero__title-img     { width: 122%; max-width: 122%; margin-left: -16%; }
+  .hero__container     { grid-template-columns: 1.04fr 0.96fr; padding-top: 96px; }
+  .hero__image         { width: 152%; max-width: 152%; margin: 0 -22% 0 -30%; }
+  .hero__title-img     { width: 140%; max-width: 140%; margin: 0 -38% 0 -8%; }
   .hero__title-intro   { font-size: 1.3rem; white-space: normal; }
   .hero__title em      { font-size: 2.6rem; }
   .hero__actions       { flex-direction: column; align-items: center; }
