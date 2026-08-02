@@ -1901,41 +1901,62 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .header__cta         { display: none; }
   .header__hamburger   { display: flex; }
 
-  /* ── Hero ── */
+  /* ── Hero: título à esquerda, foto à direita ── */
   .hero__container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 0.82fr 1.18fr;
+    column-gap: 4px;
+    row-gap: 0;
     text-align: center;
-    padding-top: 164px;
+    padding-top: 104px;
     padding-bottom: 32px;
-    align-items: center;
-    gap: 0;
+    align-items: end;
     min-height: auto;
   }
+  .hero__content {
+    display: contents;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero__title {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+    padding-bottom: 8px;
+  }
+  .hero__title-img {
+    width: 118%;
+    max-width: 118%;
+    max-height: none;
+    margin: 0 0 0 -14%;
+    animation: none;
+  }
+
   .hero__image-wrap {
-    order: -1;
-    height: 86vw;
-    max-height: 450px;
+    grid-column: 2;
+    grid-row: 1;
+    order: 0;
+    height: auto;
+    max-height: none;
     width: 100%;
     padding-top: 0;
-    margin: 48px 0 0;
+    margin: 0;
+    align-items: flex-end;
   }
   .hero__image {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    margin: 0 auto;
+    height: auto;
+    width: 134%;
+    max-width: 134%;
+    margin: 0 -17% 0 -17%;
     animation: none;
     transform: none;
   }
-  .hero__image-glow { width: 90%; height: 40%; }
-  .hero__content   { padding: 4px 0 40px; }
-  .hero__title-img {
-    width: 82%;
-    max-width: 320px;
-    max-height: 260px;
-    margin: 0 auto 4px auto;
-    animation: none;
-  }
+  .hero__image-glow { width: 92%; height: 38%; }
+
+  .hero__stats    { grid-column: 1 / -1; grid-row: 2; margin-top: 18px; }
+  .hero__subtitle { grid-column: 1 / -1; grid-row: 3; }
+  .hero__actions  { grid-column: 1 / -1; grid-row: 4; }
   .hero__eyebrow   { font-size: .7rem; }
   .hero__subtitle  { margin-left: auto; margin-right: auto; font-size: .95rem; }
   .hero__actions   { justify-content: center; }
@@ -1959,6 +1980,13 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .hero__stats     { margin-bottom: 28px; }
   .hero__bg::after { height: 60px; }
   .hero__scroll-indicator { display: none; }
+
+  /* Ondulação mais visível no mobile */
+  .hero__waves { height: 24vh; min-height: 150px; max-height: 230px; }
+  .hero__wave  { width: 420%; }
+  .hero__wave--back  { color: rgba(30, 0, 53, .55); }
+  .hero__wave--mid   { color: rgba(168, 85, 247, .40); }
+  .hero__wave--front { color: rgba(233, 213, 255, .34); }
 
   /* ── Sobre ── */
   .about            { grid-template-columns: 1fr; }
@@ -2029,9 +2057,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .container { padding: 0 16px; }
 
   /* Hero */
-  .hero__image-wrap    { height: 82vw; max-height: 380px; margin: 44px 0 0; }
-  .hero__image         { height: 100%; transform: none; }
-  .hero__title-img     { max-height: 210px; }
+  .hero__container     { grid-template-columns: 0.8fr 1.2fr; padding-top: 96px; }
+  .hero__image         { width: 138%; max-width: 138%; margin: 0 -19%; }
+  .hero__title-img     { width: 122%; max-width: 122%; margin-left: -16%; }
   .hero__title-intro   { font-size: 1.3rem; white-space: normal; }
   .hero__title em      { font-size: 2.6rem; }
   .hero__actions       { flex-direction: column; align-items: center; }
