@@ -378,10 +378,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 .hero__title-img {
   display: block;
-  width: 120%;
-  max-width: 140%;
-  margin-left: -10%;
-  max-height: 550px;
+  width: 100%;
+  max-width: 115%;
+  margin-left: -8%;
+  max-height: 450px;
   margin-top: 12px;
   margin-bottom: 24px;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
@@ -629,10 +629,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .hero__image {
   position: relative;
   z-index: 1;
-  height: 135%;
+  height: 152%;
   width: auto;
-  max-width: 140%;
-  margin-left: -10%;
+  max-width: 155%;
+  margin-left: -16%;
   object-fit: contain;
   object-position: bottom;
   animation: float 7s ease-in-out infinite;
