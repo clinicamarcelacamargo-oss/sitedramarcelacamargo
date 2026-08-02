@@ -420,6 +420,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex-shrink: 0;
+  min-width: 0;
 }
 .hero__stat strong {
   font-size: 2.4rem;
@@ -489,7 +491,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   white-space: nowrap;
 }
 .stat--featured strong {
-  font-size: 3rem;
+  font-size: 2.8rem;
+  padding-right: 2px;
+  overflow: visible;
   background: linear-gradient(135deg, #fffbe8 0%, #f7d26b 45%, #e0b53a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -503,22 +507,76 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
 @media (max-width: 640px) {
   .stat--featured        { padding: 14px 18px 12px; }
-  .stat--featured strong { font-size: 2.3rem; }
+  .stat--featured strong { font-size: 2.2rem; }
+  .stat--google          { padding: 12px 16px 11px; }
+  .stat--google strong   { font-size: 1.9rem; }
+  .google-g              { width: 24px; height: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .stat--featured::before { animation: none; }
 }
 
-.stat--gold strong {
-  background: linear-gradient(135deg, #fff099 0%, #f5c842 50%, #c9a227 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 4px 12px rgba(245,200,66,.4));
+/* ── Card de avaliação com identidade visual Google ── */
+.stat--google {
+  align-items: flex-start;
+  gap: 4px;
+  padding: 16px 22px 14px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 28px rgba(0,0,0,.22);
 }
-.stat--gold span {
-  color: #ffdf70 !important;
+.google-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+.google-g {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+.stat--google strong {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #202124;
+  text-shadow: none;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -.01em;
+}
+.google-stars {
+  display: flex;
+  gap: 3px;
+  color: #FBBC05;
+  font-size: .82rem;
+  line-height: 1;
+}
+.stat--google .google-label {
+  font-size: .78rem !important;
+  font-weight: 500;
+  color: #5f6368 !important;
+  text-transform: none;
+  letter-spacing: 0 !important;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+.google-word {
+  font-family: "Roboto", "Product Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: -.01em;
+}
+.google-word em {
+  font-style: normal;
+}
+.google-word em:nth-child(1) { color: #4285F4; }
+.google-word em:nth-child(2) { color: #EA4335; }
+.google-word em:nth-child(3) { color: #FBBC05; }
+.google-word em:nth-child(4) { color: #4285F4; }
+.google-word em:nth-child(5) { color: #34A853; }
+.google-word em:nth-child(6) { color: #EA4335; }
 
 /* Hero image */
 .hero__image-wrap {
