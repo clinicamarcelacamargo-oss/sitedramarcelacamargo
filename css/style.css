@@ -449,6 +449,34 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: none;
 }
 
+/* ── Destaque premium: pacientes atendidos ── */
+.stat--patients {
+  position: relative;
+  padding: 16px 24px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.06) 100%);
+  border: 1px solid rgba(255,255,255,.38);
+  box-shadow:
+    0 10px 30px rgba(76, 29, 149, .28),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
+.stat--patients strong {
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 45%, #d9c2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 14px rgba(255,255,255,.35));
+}
+.stat--patients > span:last-child {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+.stat__badge--light {
+  color: #4c1d95 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #efe6ff 100%) !important;
+  box-shadow: 0 3px 10px rgba(255,255,255,.28) !important;
+}
+
 /* ── Destaque premium: 10 anos de experiência ── */
 .stat--featured {
   position: relative;
@@ -479,7 +507,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   0%, 62%  { transform: translateX(-70%); }
   92%, 100%{ transform: translateX(70%); }
 }
-.stat--featured .stat__badge {
+.stat__badge {
   align-self: center;
   font-size: .58rem !important;
   font-weight: 700;
