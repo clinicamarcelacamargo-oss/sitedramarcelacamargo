@@ -1856,25 +1856,29 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   }
   .hero__image-wrap {
     order: -1;
-    height: 92vw;
-    max-height: 560px;
+    height: 96vw;
+    max-height: 520px;
     width: 100%;
-    padding-top: 8px;
-    margin-bottom: -8px;
-    margin-top: 24px;
+    padding-top: 0;
+    margin: 8px 0 0;
   }
   .hero__image {
-    height: calc(100% - 8px);
+    height: 100%;
     width: auto;
     max-width: 100%;
     margin: 0 auto;
     animation: none;
-    transform: scale(1.18);
-    transform-origin: bottom center;
+    transform: none;
   }
   .hero__image-glow { width: 90%; height: 40%; }
-  .hero__content   { padding: 12px 0 48px; }
-  .hero__title-img { width: 85%; max-width: 350px; margin: 0 auto 24px auto; }
+  .hero__content   { padding: 4px 0 40px; }
+  .hero__title-img {
+    width: 82%;
+    max-width: 320px;
+    max-height: 260px;
+    margin: 0 auto 4px auto;
+    animation: none;
+  }
   .hero__eyebrow   { font-size: .7rem; }
   .hero__subtitle  { margin-left: auto; margin-right: auto; font-size: .95rem; }
   .hero__actions   { justify-content: center; }
@@ -1889,7 +1893,13 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     margin-left: auto;
     margin-right: auto;
   }
-  .hero__stat      { flex: 1 1 100%; min-width: 0; padding: 16px 18px; }
+  .hero__stat      { flex: 1 1 100%; min-width: 0; padding: 14px 16px; gap: 6px; }
+  .hero__stat strong { font-size: 2rem; }
+  .hero__stat span   { font-size: .72rem; }
+  .stat--patients strong,
+  .stat--featured strong { font-size: 2.1rem; }
+  .stat--google strong   { font-size: 1.7rem; }
+  .hero__stats     { margin-bottom: 28px; }
   .hero__bg::after { height: 60px; }
   .hero__scroll-indicator { display: none; }
 
@@ -1962,8 +1972,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .container { padding: 0 16px; }
 
   /* Hero */
-  .hero__image-wrap    { height: 88vw; max-height: 470px; padding-top: 8px; margin-bottom: -24px; margin-top: 16px; }
-  .hero__image         { height: calc(100% - 8px); transform: scale(1.12); }
+  .hero__image-wrap    { height: 92vw; max-height: 440px; margin: 4px 0 0; }
+  .hero__image         { height: 100%; transform: none; }
+  .hero__title-img     { max-height: 210px; }
   .hero__title-intro   { font-size: 1.3rem; white-space: normal; }
   .hero__title em      { font-size: 2.6rem; }
   .hero__actions       { flex-direction: column; align-items: center; }
