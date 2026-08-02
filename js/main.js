@@ -188,30 +188,73 @@ if (scrollIndicator) {
   }, { passive: true });
 }
 
-/* ── Vídeo da seção Sobre: toggle de som ── */
+/* ── Vídeo da seção Sobre: som ativo ao entrar na tela ── */
 (() => {
   const video = document.querySelector('.about__video');
   const btn   = document.querySelector('.about__video-sound');
-  if (!video || !btn) return;
+  if (!video) return;
 
-  const icon = btn.querySelector('i');
+  const icon = btn ? btn.querySelector('i') : null;
 
-  btn.addEventListener('click', () => {
-    video.muted = !video.muted;
+  const sincronizaBotao = () => {
+    if (!btn || !icon) return;
     icon.className = video.muted ? 'fas fa-volume-xmark' : 'fas fa-volume-high';
     btn.setAttribute('aria-label', video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo');
-    if (!video.muted) video.play().catch(() => {});
-  });
+  };
 
-  /* Pausa quando o vídeo sai da tela (economia de recursos) */
+  /* Tenta tocar com som; se o navegador bloquear, mantém mudo e tenta de novo
+     assim que houver qualquer interação do usuário na página. */
+  let jaTocouComSom = false;
+
+  const tocarComSom = () => {
+    if (jaTocouComSom) return;
+    video.muted = false;
+    video.volume = 1;
+    const p = video.play();
+    if (p && typeof p.catch === 'function') {
+      p.then(() => { jaTocouComSom = true; sincronizaBotao(); })
+       .catch(() => {
+         video.muted = true;
+         video.play().catch(() => {});
+         sincronizaBotao();
+       });
+    } else {
+      jaTocouComSom = true;
+      sincronizaBotao();
+    }
+  };
+
+  let naTela = false;
+
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) video.play().catch(() => {});
+        naTela = e.isIntersecting;
+        if (naTela) tocarComSom();
         else video.pause();
       });
-    }, { threshold: 0.2 }).observe(video);
+    }, { threshold: 0.35 }).observe(video);
   }
+
+  /* Primeira interação do usuário libera o autoplay com som */
+  const liberar = () => {
+    if (naTela) tocarComSom();
+  };
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev =>
+    document.addEventListener(ev, liberar, { passive: true })
+  );
+
+  /* Botão manual de som */
+  if (btn) {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      if (!video.muted) { jaTocouComSom = true; video.play().catch(() => {}); }
+      sincronizaBotao();
+    });
+  }
+
+  sincronizaBotao();
 })();
 
 /* ── Modal de escolha de unidade para os CTAs de WhatsApp ── */
