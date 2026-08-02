@@ -315,8 +315,8 @@
             Nova unidade a caminho<br>
             Belo Horizonte · MG
           </p>
-          <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Quero%20ser%20avisada%20sobre%20a%20abertura%20da%20Unidade%20Savassi"
-             target="_blank" rel="noopener" class="unidade__link">
+          <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20o%20site%20e%20quero%20ser%20avisada%20sobre%20a%20abertura%20da%20Unidade%20Savassi"
+             target="_blank" rel="noopener" class="unidade__link" data-wa-direct>
             Quero ser avisada <i class="fas fa-arrow-right"></i>
           </a>
         </article>
@@ -1006,6 +1006,40 @@
     <i class="fab fa-whatsapp"></i>
     <span class="whatsapp-fab__pulse"></span>
   </a>
+
+  <!-- ══════════════════════════════════════
+       MODAL — ESCOLHA DE UNIDADE
+  ══════════════════════════════════════ -->
+  <div class="unit-modal" id="unitModal" role="dialog" aria-modal="true" aria-labelledby="unitModalTitle" hidden>
+    <div class="unit-modal__backdrop" data-unit-close></div>
+
+    <div class="unit-modal__box" role="document">
+      <button class="unit-modal__close" type="button" data-unit-close aria-label="Fechar">
+        <i class="fas fa-xmark"></i>
+      </button>
+
+      <div class="unit-modal__head">
+        <span class="unit-modal__eyebrow">Atendimento via WhatsApp</span>
+        <h3 class="unit-modal__title" id="unitModalTitle">Em qual unidade você quer ser atendida?</h3>
+      </div>
+
+      <div class="unit-modal__options">
+        <button class="unit-option" type="button" data-unidade="Planalto">
+          <span class="unit-option__tag">Em funcionamento</span>
+          <strong class="unit-option__nome">Unidade Planalto</strong>
+          <span class="unit-option__end">Av. Dr. Cristiano Guimarães, 928 · BH/MG</span>
+          <span class="unit-option__go"><i class="fab fa-whatsapp"></i> Falar agora</span>
+        </button>
+
+        <button class="unit-option" type="button" data-unidade="Savassi">
+          <span class="unit-option__tag unit-option__tag--breve">Em breve</span>
+          <strong class="unit-option__nome">Unidade Savassi</strong>
+          <span class="unit-option__end">Nova unidade a caminho · BH/MG</span>
+          <span class="unit-option__go"><i class="fab fa-whatsapp"></i> Falar agora</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

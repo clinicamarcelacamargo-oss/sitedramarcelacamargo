@@ -213,3 +213,54 @@ if (scrollIndicator) {
     }, { threshold: 0.2 }).observe(video);
   }
 })();
+
+/* ── Modal de escolha de unidade para os CTAs de WhatsApp ── */
+(() => {
+  const modal = document.getElementById('unitModal');
+  if (!modal) return;
+
+  const WHATSAPP = '5531995589065';
+  const MENSAGENS = {
+    Planalto: 'Olá! Acessei o site e gostaria de saber mais sobre os procedimentos oferecidos. Quero ser atendida na Unidade Planalto (Av. Dr. Cristiano Guimarães, 928 - BH/MG).',
+    Savassi:  'Olá! Acessei o site e gostaria de saber mais sobre os procedimentos oferecidos. Tenho interesse em ser atendida na Unidade Savassi (em breve).'
+  };
+
+  let ultimoFoco = null;
+
+  const abrir = () => {
+    ultimoFoco = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add('unit-modal-open');
+    const primeira = modal.querySelector('.unit-option');
+    if (primeira) primeira.focus();
+  };
+
+  const fechar = () => {
+    modal.hidden = true;
+    document.body.classList.remove('unit-modal-open');
+    if (ultimoFoco) ultimoFoco.focus();
+  };
+
+  /* Intercepta todos os CTAs de WhatsApp, exceto os já vinculados a uma unidade */
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href*="wa.me"]');
+    if (!link || link.hasAttribute('data-wa-direct')) return;
+    e.preventDefault();
+    abrir();
+  });
+
+  /* Escolha da unidade → abre o WhatsApp com a mensagem personalizada */
+  modal.querySelectorAll('.unit-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const unidade = btn.dataset.unidade;
+      const texto   = MENSAGENS[unidade] || MENSAGENS.Planalto;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+      fechar();
+    });
+  });
+
+  modal.querySelectorAll('[data-unit-close]').forEach(el => el.addEventListener('click', fechar));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.hidden) fechar();
+  });
+})();
