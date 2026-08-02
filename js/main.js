@@ -187,3 +187,29 @@ if (scrollIndicator) {
     scrollIndicator.style.opacity = window.scrollY > 80 ? '0' : '1';
   }, { passive: true });
 }
+
+/* ── Vídeo da seção Sobre: toggle de som ── */
+(() => {
+  const video = document.querySelector('.about__video');
+  const btn   = document.querySelector('.about__video-sound');
+  if (!video || !btn) return;
+
+  const icon = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    icon.className = video.muted ? 'fas fa-volume-xmark' : 'fas fa-volume-high';
+    btn.setAttribute('aria-label', video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo');
+    if (!video.muted) video.play().catch(() => {});
+  });
+
+  /* Pausa quando o vídeo sai da tela (economia de recursos) */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+    }, { threshold: 0.2 }).observe(video);
+  }
+})();

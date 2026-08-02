@@ -683,12 +683,41 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   height: 100%;
   min-height: 600px;
 }
-.about__image-wrap > img {
+.about__image-wrap > img,
+.about__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   opacity: .92;
+  display: block;
+}
+.about__video {
+  background: var(--dark);
+}
+
+/* Botão de som do vídeo */
+.about__video-sound {
+  position: absolute;
+  top: 24px; left: 24px;
+  width: 46px; height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  font-size: .95rem;
+  background: rgba(20, 10, 35, .5);
+  border: 1px solid rgba(255,255,255,.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background .25s ease, transform .25s ease;
+  z-index: 2;
+}
+.about__video-sound:hover {
+  background: rgba(20, 10, 35, .75);
+  transform: scale(1.06);
 }
 
 .about__image-badge {
