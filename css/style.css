@@ -312,8 +312,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     var(--purple-800) 45%,
     var(--purple-600) 72%,
     #d8b4fe 100%);
-  background-size: 220% 220%;
-  animation: heroFlow 22s ease-in-out infinite alternate;
+  background-size: 300% 300%;
+  animation: heroFlow 16s ease-in-out infinite alternate;
   z-index: 0;
 }
 .hero__bg::before {
@@ -326,9 +326,21 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 @keyframes heroFlow {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 45%; }
-  100% { background-position: 20%  60%; }
+  0%   { background-position:   0%  30%; }
+  25%  { background-position:  70%  70%; }
+  50%  { background-position: 100%  40%; }
+  75%  { background-position:  35% 100%; }
+  100% { background-position:  10%  55%; }
+}
+
+/* camada de brilho que atravessa o fundo */
+.hero__bg::before {
+  animation: heroGlowPulse 14s ease-in-out infinite alternate;
+}
+@keyframes heroGlowPulse {
+  0%   { opacity: .75; transform: scale(1)    translate(0, 0); }
+  50%  { opacity: 1;   transform: scale(1.12) translate(-2%, 1%); }
+  100% { opacity: .8;  transform: scale(1.04) translate(2%, -1%); }
 }
 
 /* ── Blobs de luz em movimento ── */
@@ -340,34 +352,79 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   will-change: transform;
 }
 .hero__blob--1 {
-  width: 46vw; height: 46vw;
-  top: -12%; left: -8%;
-  background: radial-gradient(circle, rgba(216,180,254,.30) 0%, transparent 70%);
-  animation: blobDrift1 26s ease-in-out infinite;
+  width: 58vw; height: 58vw;
+  top: -18%; left: -12%;
+  background: radial-gradient(circle, rgba(216,180,254,.42) 0%, transparent 68%);
+  animation: blobDrift1 19s ease-in-out infinite;
 }
 .hero__blob--2 {
-  width: 40vw; height: 40vw;
-  bottom: -14%; left: 22%;
-  background: radial-gradient(circle, rgba(59,7,100,.55) 0%, transparent 70%);
-  animation: blobDrift2 32s ease-in-out infinite;
+  width: 54vw; height: 54vw;
+  bottom: -20%; left: 14%;
+  background: radial-gradient(circle, rgba(30,0,53,.72) 0%, transparent 68%);
+  animation: blobDrift2 23s ease-in-out infinite;
 }
 .hero__blob--3 {
-  width: 34vw; height: 34vw;
-  top: 18%; right: -6%;
-  background: radial-gradient(circle, rgba(168,85,247,.32) 0%, transparent 70%);
-  animation: blobDrift3 28s ease-in-out infinite;
+  width: 46vw; height: 46vw;
+  top: 8%; right: -10%;
+  background: radial-gradient(circle, rgba(168,85,247,.48) 0%, transparent 68%);
+  animation: blobDrift3 17s ease-in-out infinite;
 }
+.hero__blob--4 {
+  width: 50vw; height: 50vw;
+  top: 34%; left: 30%;
+  background: radial-gradient(circle, rgba(107,33,168,.55) 0%, transparent 68%);
+  animation: blobDrift4 26s ease-in-out infinite;
+}
+.hero__blob--5 {
+  width: 38vw; height: 38vw;
+  bottom: 6%; right: 18%;
+  background: radial-gradient(circle, rgba(233,213,255,.34) 0%, transparent 68%);
+  animation: blobDrift5 21s ease-in-out infinite;
+}
+
 @keyframes blobDrift1 {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50%     { transform: translate(6vw, 5vh) scale(1.12); }
+  0%,100% { transform: translate(0,0)         scale(1); }
+  33%     { transform: translate(12vw, 8vh)   scale(1.18); }
+  66%     { transform: translate(4vw, 16vh)   scale(.9); }
 }
 @keyframes blobDrift2 {
-  0%,100% { transform: translate(0,0) scale(1.05); }
-  50%     { transform: translate(-7vw,-4vh) scale(.92); }
+  0%,100% { transform: translate(0,0)         scale(1.06); }
+  33%     { transform: translate(-14vw,-9vh)  scale(.88); }
+  66%     { transform: translate(8vw,-14vh)   scale(1.16); }
 }
 @keyframes blobDrift3 {
-  0%,100% { transform: translate(0,0) scale(.96); }
-  50%     { transform: translate(-5vw, 6vh) scale(1.14); }
+  0%,100% { transform: translate(0,0)         scale(.95); }
+  33%     { transform: translate(-11vw, 12vh) scale(1.2); }
+  66%     { transform: translate(-3vw,-8vh)   scale(1.02); }
+}
+@keyframes blobDrift4 {
+  0%,100% { transform: translate(0,0)         scale(1); }
+  33%     { transform: translate(-16vw, 6vh)  scale(1.15); }
+  66%     { transform: translate(10vw,-10vh)  scale(.86); }
+}
+@keyframes blobDrift5 {
+  0%,100% { transform: translate(0,0)         scale(1.08); }
+  33%     { transform: translate(9vw,-12vh)   scale(.9); }
+  66%     { transform: translate(-12vw,-4vh)  scale(1.2); }
+}
+
+/* Faixa de luz diagonal atravessando o fundo */
+.hero__sheen {
+  position: absolute;
+  inset: -30% -60%;
+  pointer-events: none;
+  background: linear-gradient(115deg,
+    transparent 38%,
+    rgba(233,213,255,.16) 48%,
+    rgba(255,255,255,.10) 52%,
+    transparent 62%);
+  transform: translateX(-60%);
+  animation: heroSheen 13s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes heroSheen {
+  from { transform: translateX(-60%) rotate(-2deg); }
+  to   { transform: translateX(60%)  rotate(2deg); }
 }
 
 /* ── Ondulação na base do hero ── */
@@ -407,7 +464,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__bg, .hero__blob, .hero__wave { animation: none !important; }
+  .hero__bg, .hero__bg::before, .hero__blob, .hero__wave, .hero__sheen { animation: none !important; }
 }
 .hero__bg::after {
   content: '';
