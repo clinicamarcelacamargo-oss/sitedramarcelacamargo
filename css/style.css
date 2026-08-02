@@ -443,6 +443,72 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   flex-shrink: 0;
 }
 
+/* ── Destaque premium: 10 anos de experiência ── */
+.stat--featured {
+  position: relative;
+  padding: 18px 26px 16px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255,240,190,.16) 0%, rgba(255,255,255,.05) 100%);
+  border: 1px solid rgba(245,200,66,.45);
+  box-shadow:
+    0 10px 30px rgba(201,162,39,.28),
+    inset 0 1px 0 rgba(255,255,255,.28);
+  overflow: hidden;
+  isolation: isolate;
+}
+.stat--featured::before {
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(105deg,
+    transparent 42%,
+    rgba(255,255,255,.42) 50%,
+    transparent 58%);
+  transform: translateX(-70%);
+  animation: statShine 5.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+@keyframes statShine {
+  0%, 62%  { transform: translateX(-70%); }
+  92%, 100%{ transform: translateX(70%); }
+}
+.stat--featured .stat__badge {
+  align-self: flex-start;
+  font-size: .58rem !important;
+  font-weight: 700;
+  letter-spacing: .16em !important;
+  text-transform: uppercase;
+  color: #2a2005 !important;
+  background: linear-gradient(135deg, #ffe89a 0%, #f5c842 55%, #d9ad2e 100%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 4px;
+  box-shadow: 0 3px 10px rgba(245,200,66,.4);
+  white-space: nowrap;
+}
+.stat--featured strong {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #fffbe8 0%, #f7d26b 45%, #e0b53a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 14px rgba(245,200,66,.45));
+}
+.stat--featured > span:last-child {
+  color: #ffeab5 !important;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .stat--featured        { padding: 14px 18px 12px; }
+  .stat--featured strong { font-size: 2.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat--featured::before { animation: none; }
+}
+
 .stat--gold strong {
   background: linear-gradient(135deg, #fff099 0%, #f5c842 50%, #c9a227 100%);
   -webkit-background-clip: text;
