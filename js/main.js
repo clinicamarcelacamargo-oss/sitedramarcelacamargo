@@ -307,3 +307,113 @@ if (scrollIndicator) {
     if (e.key === 'Escape' && !modal.hidden) fechar();
   });
 })();
+
+/* ── Hero Carousel (Promoções & Destaques) ── */
+(() => {
+  const carousel = document.getElementById('heroCarousel');
+  if (!carousel) return;
+
+  const slides  = carousel.querySelectorAll('.hero-slide');
+  const dots    = carousel.querySelectorAll('.hero-carousel__dot');
+  const prevBtn = document.getElementById('heroPrevBtn');
+  const nextBtn = document.getElementById('heroNextBtn');
+  if (!slides.length) return;
+
+  let current = 0;
+  const total = slides.length;
+  const INTERVAL = 6000;
+  let timer = null;
+
+  const showSlide = (index) => {
+    current = (index + total) % total;
+
+    slides.forEach((slide, i) => {
+      const isActive = i === current;
+      slide.classList.toggle('hero-slide--active', isActive);
+      slide.setAttribute('aria-hidden', !isActive);
+    });
+
+    dots.forEach((dot, i) => {
+      const isActive = i === current;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  };
+
+  const nextSlide = () => showSlide(current + 1);
+  const prevSlide = () => showSlide(current - 1);
+
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    timer = setInterval(nextSlide, INTERVAL);
+  };
+
+  const stopAutoPlay = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      startAutoPlay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      startAutoPlay();
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.index, 10);
+      if (!isNaN(idx)) {
+        showSlide(idx);
+        startAutoPlay();
+      }
+    });
+  });
+
+  // Pausa ao passar o mouse ou focar
+  carousel.addEventListener('mouseenter', stopAutoPlay);
+  carousel.addEventListener('mouseleave', startAutoPlay);
+  carousel.addEventListener('focusin', stopAutoPlay);
+  carousel.addEventListener('focusout', startAutoPlay);
+
+  // Suporte a gesto de swipe (touch) no celular
+  let touchStartX = 0;
+  let touchEndX   = 0;
+
+  carousel.addEventListener('touchstart', e => {
+    stopAutoPlay();
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+    startAutoPlay();
+  }, { passive: true });
+
+  // Navegação por teclado
+  carousel.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+      startAutoPlay();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+      startAutoPlay();
+    }
+  });
+
+  startAutoPlay();
+})();

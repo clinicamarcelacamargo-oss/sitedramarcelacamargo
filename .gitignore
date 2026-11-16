@@ -1,0 +1,4 @@
+.vercel
+.env*
+desktop.ini
+*/desktop.ini

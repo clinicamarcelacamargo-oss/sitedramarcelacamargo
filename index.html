@@ -235,11 +235,80 @@
 
     <div class="container hero__container">
 
-      <div class="hero__content" data-animate="fade-up">
-        <h1 class="hero__title">
-          <img src="assets/estetica-avancada.png" alt="Estética Avançada" class="hero__title-img">
-        </h1>
+      <!-- ── Carrossel Principal da Hero (Promoções & Institucional) ── -->
+      <div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="carousel" aria-label="Promoções e Destaques">
+        
+        <div class="hero-carousel__track">
+          
+          <!-- Slide 1: Promoção Black Friday / Grupo VIP -->
+          <div class="hero-slide hero-slide--banner hero-slide--active" role="group" aria-roledescription="slide" aria-label="1 de 2: Black Friday Grupo VIP" data-slide="0">
+            <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20o%20site%20e%20quero%20entrar%20no%20Grupo%20VIP%20da%20Black%20Friday" 
+               target="_blank" rel="noopener" data-wa-direct class="hero-banner-card" aria-label="Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11">
+              <div class="hero-banner-wrapper">
+                <img src="assets/banners/banner-black-friday.jpg" 
+                     alt="Dra. Marcela Camargo - Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11" 
+                     class="hero-banner-img" 
+                     width="1024" height="426" 
+                     loading="eager" fetchpriority="high">
+                <span class="hero-banner-tag"><span class="pulse-dot"></span> Promoção Exclusiva</span>
+                <span class="hero-banner-pill">
+                  <i class="fab fa-whatsapp"></i> Entrar no Grupo VIP <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </a>
+          </div>
 
+          <!-- Slide 2: Institucional Dra. Marcela Camargo -->
+          <div class="hero-slide hero-slide--institutional" role="group" aria-roledescription="slide" aria-label="2 de 2: Estética Avançada Dra. Marcela Camargo" data-slide="1">
+            <div class="hero-institutional">
+              <div class="hero-institutional__content">
+                <h1 class="hero__title">
+                  <span class="sr-only">Dra. Marcela Camargo - Estética Avançada</span>
+                  <img src="assets/estetica-avancada.png" alt="Estética Avançada - Dra. Marcela Camargo" class="hero__title-img">
+                </h1>
+
+                <p class="hero__subtitle">
+                  Tratamentos personalizados com técnicas avançadas, segurança e
+                  um olhar artístico único para realçar a sua melhor versão.
+                </p>
+
+                <div class="hero__actions">
+                  <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20procedimentos%20est%C3%A9ticos" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+                    <i class="fab fa-whatsapp"></i> Agende a sua Avaliação
+                  </a>
+                  <a href="#tratamentos" class="btn btn--ghost btn--lg">
+                    Ver Tratamentos <i class="fas fa-arrow-down"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="hero-institutional__image-wrap">
+                <div class="hero__image-glow"></div>
+                <img src="assets/fotos/dra-hero-azul.png" alt="Dra. Marcela Camargo" class="hero-institutional__image">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controles do Carrossel (Setas) -->
+        <button class="hero-carousel__nav hero-carousel__nav--prev" id="heroPrevBtn" aria-label="Slide anterior">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="hero-carousel__nav hero-carousel__nav--next" id="heroNextBtn" aria-label="Próximo slide">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <!-- Indicadores (Dots) -->
+        <div class="hero-carousel__dots" id="heroDots" role="tablist" aria-label="Selecionar slide">
+          <button class="hero-carousel__dot active" role="tab" aria-selected="true" aria-label="Slide 1: Black Friday" data-index="0"></button>
+          <button class="hero-carousel__dot" role="tab" aria-selected="false" aria-label="Slide 2: Estética Avançada" data-index="1"></button>
+        </div>
+
+      </div>
+
+      <!-- ── Barra de Prova Social e Autoridade (Redistribuída abaixo do carrossel) ── -->
+      <div class="hero__stats-bar" data-animate="fade-up">
         <div class="hero__stats">
           <div class="hero__stat stat--patients">
             <span class="stat__badge stat__badge--light">Confiança</span>
@@ -269,27 +338,6 @@
             <span class="google-label">Avaliação no <b class="google-word"><em>G</em><em>o</em><em>o</em><em>g</em><em>l</em><em>e</em></b></span>
           </div>
         </div>
-
-        <p class="hero__subtitle">
-          Tratamentos personalizados com técnicas avançadas, segurança e
-          um olhar artístico único para realçar a sua melhor versão.
-        </p>
-
-        <div class="hero__actions">
-          <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20seu%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20procedimentos%20est%C3%A9ticos" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
-            <i class="fab fa-whatsapp"></i> Agende a sua Avaliação
-          </a>
-          <a href="#tratamentos" class="btn btn--ghost btn--lg">
-            Ver Tratamentos <i class="fas fa-arrow-down"></i>
-          </a>
-        </div>
-
-
-      </div>
-
-      <div class="hero__image-wrap" data-animate="fade-left">
-        <div class="hero__image-glow"></div>
-        <img src="assets/fotos/dra-hero-azul.png" alt="Dra. Marcela Camargo" class="hero__image">
       </div>
 
     </div>
