@@ -493,53 +493,35 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding-top: 100px;
+  padding-top: 80px;
   padding-bottom: 40px;
 }
 
-.hero__container {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1220px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* ══════════════════════════════════════════════
-   CARROSSEL HERO
+   CARROSSEL HERO FULL-WIDTH (Extensão total da tela)
 ══════════════════════════════════════════════ */
 .hero-carousel {
   position: relative;
   width: 100%;
-  max-width: 1140px;
-  border-radius: 24px;
-  background: rgba(30, 0, 53, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 24px 60px rgba(15, 3, 25, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
-  margin-bottom: 24px;
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
-}
-
-.hero-carousel:hover {
-  box-shadow: 0 28px 70px rgba(15, 3, 25, 0.65), 0 0 35px rgba(216, 180, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  border-color: rgba(255, 255, 255, 0.32);
+  margin-bottom: 28px;
 }
 
 .hero-carousel__track {
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
 }
 
 /* Slides com transição suave crossfade */
@@ -547,8 +529,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   grid-area: 1 / 1;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(0.985);
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   width: 100%;
   z-index: 1;
@@ -557,118 +538,60 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .hero-slide--active {
   opacity: 1;
   visibility: visible;
-  transform: scale(1);
   pointer-events: auto;
   z-index: 2;
 }
 
-/* ── Slide 1: Card do Banner Promocional ── */
-.hero-banner-card {
-  display: block;
+/* ── Slide 1: Banner Full-Width ── */
+.hero-slide--banner {
   width: 100%;
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
+  background: linear-gradient(90deg, #f0a1b7 0%, #fad1e0 20%, #fad1e0 80%, #ed9ab4 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.hero-banner-wrapper {
-  position: relative;
-  width: 100%;
+.hero-banner-link {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
   overflow: hidden;
-  background: #12011b;
 }
 
 .hero-banner-img {
   width: 100%;
+  max-width: 1920px;
   height: auto;
-  max-height: 480px;
-  object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+  margin: 0 auto;
+  transition: transform 0.5s ease;
 }
 
-.hero-banner-card:hover .hero-banner-img {
-  transform: scale(1.025);
-  filter: brightness(1.04);
+.hero-banner-link:hover .hero-banner-img {
+  transform: scale(1.008);
 }
 
-/* Tag de Promoção no Banner */
-.hero-banner-tag {
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15, 3, 25, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fce7f3;
-  border: 1px solid rgba(244, 114, 182, 0.45);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  z-index: 2;
+/* ── Slide 2: Slide Institucional Centralizado ── */
+.hero-slide--institutional {
+  width: 100%;
 }
 
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  background: #ec4899;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #ec4899;
-  animation: pulseDot 1.8s infinite;
+.hero-institutional__container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-@keyframes pulseDot {
-  0%   { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(236,72,153,0.7); }
-  70%  { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 8px rgba(236,72,153,0); }
-  100% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(236,72,153,0); }
-}
-
-/* Botão flutuante no Banner */
-.hero-banner-pill {
-  position: absolute;
-  bottom: 22px;
-  right: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: #ffffff;
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45), 0 2px 6px rgba(0,0,0,0.2);
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 2;
-}
-
-.hero-banner-card:hover .hero-banner-pill {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.65);
-}
-
-/* ── Slide 2: Slide Institucional ── */
 .hero-institutional {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 36px;
   align-items: center;
-  padding: 32px 48px;
-  min-height: 440px;
+  padding: 32px 0;
+  min-height: 480px;
 }
 
 .hero-institutional__content {
@@ -683,13 +606,13 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 420px;
+  height: 440px;
 }
 
 .hero-institutional__image {
   position: relative;
   z-index: 1;
-  max-height: 420px;
+  max-height: 440px;
   width: auto;
   object-fit: contain;
   object-position: bottom;
@@ -704,57 +627,57 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: rgba(20, 3, 35, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.15rem;
   cursor: pointer;
-  z-index: 5;
+  z-index: 10;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
 }
 
 .hero-carousel__nav:hover {
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-  border-color: rgba(255,255,255,0.6);
+  background: rgba(236, 72, 153, 0.9);
+  border-color: rgba(255,255,255,0.7);
   transform: translateY(-50%) scale(1.12);
-  box-shadow: 0 6px 20px rgba(168,85,247,0.55);
+  box-shadow: 0 6px 24px rgba(236, 72, 153, 0.6);
 }
 
-.hero-carousel__nav--prev { left: 16px; }
-.hero-carousel__nav--next { right: 16px; }
+.hero-carousel__nav--prev { left: 24px; }
+.hero-carousel__nav--next { right: 24px; }
 
 /* ── Indicadores (Dots) ── */
 .hero-carousel__dots {
   position: absolute;
-  bottom: 14px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 5;
+  z-index: 10;
   padding: 6px 14px;
   background: rgba(15, 3, 25, 0.65);
   border-radius: 999px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero-carousel__dot {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.45);
   border: none;
   cursor: pointer;
   padding: 0;
@@ -762,22 +685,28 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 .hero-carousel__dot:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .hero-carousel__dot.active {
-  width: 30px;
+  width: 32px;
   background: linear-gradient(90deg, #c084fc 0%, #f472b6 100%);
-  box-shadow: 0 0 12px rgba(244, 114, 182, 0.7);
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.8);
 }
 
 /* ── Barra de Estatísticas Redistribuída ── */
-.hero__stats-bar {
+.hero__stats-container {
   width: 100%;
   display: flex;
   justify-content: center;
   position: relative;
   z-index: 3;
+}
+
+.hero__stats-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .hero__stats-bar .hero__stats {
@@ -2199,62 +2128,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   /* ── Hero & Carrossel Mobile ── */
   .hero {
     min-height: auto;
-    padding-top: 96px;
+    padding-top: 76px;
     padding-bottom: 24px;
   }
-  .hero__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 16px;
-  }
   .hero-carousel {
-    border-radius: 18px;
-    margin-bottom: 18px;
-  }
-  .hero-banner-tag {
-    top: 12px;
-    left: 12px;
-    font-size: 0.68rem;
-    padding: 5px 12px;
-  }
-  .hero-banner-pill {
-    bottom: 12px;
-    right: 12px;
-    font-size: 0.8rem;
-    padding: 9px 16px;
-    gap: 7px;
-  }
-  .hero-institutional {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 28px 20px 0;
-    gap: 20px;
-    min-height: auto;
-  }
-  .hero-institutional__content {
-    align-items: center;
-  }
-  .hero__title-img {
-    max-width: 95%;
-    margin: 0 auto 16px;
-  }
-  .hero__subtitle {
-    margin: 0 auto 24px;
-    font-size: 0.95rem;
-  }
-  .hero__actions {
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-  .hero-institutional__image-wrap {
-    height: 280px;
-    max-height: 280px;
-    width: 100%;
-  }
-  .hero-institutional__image {
-    max-height: 280px;
-    margin: 0 auto;
+    margin-bottom: 16px;
   }
   .hero-carousel__nav {
     width: 36px;
@@ -2274,6 +2152,40 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   }
   .hero-carousel__dot.active {
     width: 22px;
+  }
+  .hero-institutional {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 24px 16px 0;
+    gap: 18px;
+    min-height: auto;
+  }
+  .hero-institutional__content {
+    align-items: center;
+  }
+  .hero__title-img {
+    max-width: 90%;
+    margin: 0 auto 16px;
+  }
+  .hero__subtitle {
+    margin: 0 auto 20px;
+    font-size: 0.95rem;
+  }
+  .hero__actions {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .hero-institutional__image-wrap {
+    height: 280px;
+    max-height: 280px;
+    width: 100%;
+  }
+  .hero-institutional__image {
+    max-height: 280px;
+    margin: 0 auto;
+  }
+  .hero__stats-container {
+    width: 100%;
   }
   .hero__stats-bar {
     width: 100%;
@@ -2381,10 +2293,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   .container { padding: 0 16px; }
 
   /* Hero */
-  .hero__container     { padding-top: 84px; }
-  .hero-banner-tag     { font-size: 0.62rem; padding: 4px 8px; top: 8px; left: 8px; }
-  .hero-banner-pill    { font-size: 0.74rem; padding: 7px 12px; bottom: 8px; right: 8px; gap: 5px; }
-  .hero-carousel       { border-radius: 14px; }
+  .hero                { padding-top: 70px; }
+  .hero-carousel__nav  { width: 32px; height: 32px; font-size: 0.78rem; }
+  .hero-carousel__nav--prev { left: 6px; }
+  .hero-carousel__nav--next { right: 6px; }
   .hero-institutional__image-wrap { height: 230px; }
   .hero-institutional__image      { max-height: 230px; }
   .hero__actions       { flex-direction: column; align-items: center; }

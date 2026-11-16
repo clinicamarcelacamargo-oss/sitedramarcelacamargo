@@ -233,33 +233,26 @@
       </div>
     </div>
 
-    <div class="container hero__container">
-
-      <!-- ── Carrossel Principal da Hero (Promoções & Institucional) ── -->
-      <div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="carousel" aria-label="Promoções e Destaques">
+    <!-- ── Carrossel Principal da Hero (Ocupa toda a extensão da tela) ── -->
+    <div class="hero-carousel hero-carousel--fullwidth" id="heroCarousel" role="region" aria-roledescription="carousel" aria-label="Promoções e Destaques">
+      
+      <div class="hero-carousel__track">
         
-        <div class="hero-carousel__track">
-          
-          <!-- Slide 1: Promoção Black Friday / Grupo VIP -->
-          <div class="hero-slide hero-slide--banner hero-slide--active" role="group" aria-roledescription="slide" aria-label="1 de 2: Black Friday Grupo VIP" data-slide="0">
-            <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20o%20site%20e%20quero%20entrar%20no%20Grupo%20VIP%20da%20Black%20Friday" 
-               target="_blank" rel="noopener" data-wa-direct class="hero-banner-card" aria-label="Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11">
-              <div class="hero-banner-wrapper">
-                <img src="assets/banners/banner-black-friday.jpg" 
-                     alt="Dra. Marcela Camargo - Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11" 
-                     class="hero-banner-img" 
-                     width="1024" height="426" 
-                     loading="eager" fetchpriority="high">
-                <span class="hero-banner-tag"><span class="pulse-dot"></span> Promoção Exclusiva</span>
-                <span class="hero-banner-pill">
-                  <i class="fab fa-whatsapp"></i> Entrar no Grupo VIP <i class="fas fa-arrow-right"></i>
-                </span>
-              </div>
-            </a>
-          </div>
+        <!-- Slide 1: Full-width Banner Black Friday -->
+        <div class="hero-slide hero-slide--banner hero-slide--active" role="group" aria-roledescription="slide" aria-label="1 de 2: Black Friday Grupo VIP" data-slide="0">
+          <a href="https://wa.me/5531995589065?text=Ol%C3%A1!%20Acessei%20o%20site%20e%20quero%20entrar%20no%20Grupo%20VIP%20da%20Black%20Friday" 
+             target="_blank" rel="noopener" data-wa-direct class="hero-banner-link" aria-label="Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11">
+            <img src="assets/banners/banner-black-friday.jpg" 
+                 alt="Dra. Marcela Camargo - Entre para o Grupo VIP e participe da nossa Black Friday - Dia 18/11" 
+                 class="hero-banner-img" 
+                 width="1024" height="426" 
+                 loading="eager" fetchpriority="high">
+          </a>
+        </div>
 
-          <!-- Slide 2: Institucional Dra. Marcela Camargo -->
-          <div class="hero-slide hero-slide--institutional" role="group" aria-roledescription="slide" aria-label="2 de 2: Estética Avançada Dra. Marcela Camargo" data-slide="1">
+        <!-- Slide 2: Institucional Dra. Marcela Camargo -->
+        <div class="hero-slide hero-slide--institutional" role="group" aria-roledescription="slide" aria-label="2 de 2: Estética Avançada Dra. Marcela Camargo" data-slide="1">
+          <div class="container hero-institutional__container">
             <div class="hero-institutional">
               <div class="hero-institutional__content">
                 <h1 class="hero__title">
@@ -288,27 +281,29 @@
               </div>
             </div>
           </div>
-
-        </div>
-
-        <!-- Controles do Carrossel (Setas) -->
-        <button class="hero-carousel__nav hero-carousel__nav--prev" id="heroPrevBtn" aria-label="Slide anterior">
-          <i class="fas fa-chevron-left" aria-hidden="true"></i>
-        </button>
-        <button class="hero-carousel__nav hero-carousel__nav--next" id="heroNextBtn" aria-label="Próximo slide">
-          <i class="fas fa-chevron-right" aria-hidden="true"></i>
-        </button>
-
-        <!-- Indicadores (Dots) -->
-        <div class="hero-carousel__dots" id="heroDots" role="tablist" aria-label="Selecionar slide">
-          <button class="hero-carousel__dot active" role="tab" aria-selected="true" aria-label="Slide 1: Black Friday" data-index="0"></button>
-          <button class="hero-carousel__dot" role="tab" aria-selected="false" aria-label="Slide 2: Estética Avançada" data-index="1"></button>
         </div>
 
       </div>
 
-      <!-- ── Barra de Prova Social e Autoridade (Redistribuída abaixo do carrossel) ── -->
-      <div class="hero__stats-bar" data-animate="fade-up">
+      <!-- Controles do Carrossel (Setas) -->
+      <button class="hero-carousel__nav hero-carousel__nav--prev" id="heroPrevBtn" aria-label="Slide anterior">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button class="hero-carousel__nav hero-carousel__nav--next" id="heroNextBtn" aria-label="Próximo slide">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <!-- Indicadores (Dots) -->
+      <div class="hero-carousel__dots" id="heroDots" role="tablist" aria-label="Selecionar slide">
+        <button class="hero-carousel__dot active" role="tab" aria-selected="true" aria-label="Slide 1: Black Friday" data-index="0"></button>
+        <button class="hero-carousel__dot" role="tab" aria-selected="false" aria-label="Slide 2: Estética Avançada" data-index="1"></button>
+      </div>
+
+    </div>
+
+    <!-- ── Barra de Prova Social e Autoridade (Redistribuída abaixo do carrossel) ── -->
+    <div class="container hero__stats-container" data-animate="fade-up">
+      <div class="hero__stats-bar">
         <div class="hero__stats">
           <div class="hero__stat stat--patients">
             <span class="stat__badge stat__badge--light">Confiança</span>
@@ -339,7 +334,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="hero__scroll-indicator">
