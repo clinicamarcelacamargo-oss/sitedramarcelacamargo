@@ -496,8 +496,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding-top: 80px;
-  padding-bottom: 40px;
+  padding-top: 76px;
+  padding-bottom: 24px;
 }
 
 /* ══════════════════════════════════════════════
@@ -514,7 +514,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   background: transparent;
   box-shadow: none;
   overflow: hidden;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
 }
 
 .hero-carousel__track {
@@ -522,6 +522,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   width: 100%;
   display: grid;
   grid-template-columns: 100%;
+  min-height: 520px;
 }
 
 /* Slides com transição suave crossfade */
@@ -532,6 +533,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -545,8 +547,12 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 /* ── Slide 1: Banner Full-Width ── */
 .hero-slide--banner {
   width: 100%;
+  height: 100%;
   background: linear-gradient(90deg, #f0a1b7 0%, #fad1e0 20%, #fad1e0 80%, #ed9ab4 100%);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-banner-link {
@@ -554,6 +560,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
   text-decoration: none;
   cursor: pointer;
   position: relative;
@@ -562,8 +569,10 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
 .hero-banner-img {
   width: 100%;
-  max-width: 1920px;
+  max-width: 1600px;
+  max-height: 520px;
   height: auto;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
   transition: transform 0.5s ease;
@@ -573,32 +582,60 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   transform: scale(1.008);
 }
 
-/* ── Slide 2: Slide Institucional Centralizado ── */
+/* ── Slide 2: Slide Institucional Centralizado & Ancorado ── */
 .hero-slide--institutional {
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .hero-institutional__container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+  height: 100%;
 }
 
 .hero-institutional {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 36px;
-  align-items: center;
-  padding: 32px 0;
-  min-height: 480px;
+  gap: 40px;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 520px;
+  padding-top: 16px;
+  padding-bottom: 0;
 }
 
 .hero-institutional__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 48px;
+  padding-top: 20px;
   z-index: 2;
+}
+
+.hero__title-img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  max-height: 380px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.82);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 32px;
 }
 
 .hero-institutional__image-wrap {
@@ -606,20 +643,27 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 440px;
+  height: 100%;
+  min-height: 520px;
+  margin-bottom: 0;
 }
 
 .hero-institutional__image {
   position: relative;
   z-index: 1;
-  max-height: 440px;
+  height: 520px;
+  max-height: 540px;
   width: auto;
+  max-width: 135%;
+  margin-left: -12%;
   object-fit: contain;
   object-position: bottom;
-  filter: drop-shadow(0 16px 36px rgba(107,33,168,.55));
+  filter: drop-shadow(0 20px 48px rgba(107,33,168,.65));
   animation: float 7s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  display: block;
+  margin-bottom: 0;
 }
 
 /* ── Controles de Navegação (Setas) ── */
@@ -658,7 +702,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 /* ── Indicadores (Dots) ── */
 .hero-carousel__dots {
   position: absolute;
-  bottom: 16px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -697,10 +741,15 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 /* ── Barra de Estatísticas Redistribuída ── */
 .hero__stats-container {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: center;
   position: relative;
   z-index: 3;
+  margin-top: 4px;
+  margin-bottom: 12px;
 }
 
 .hero__stats-bar {
@@ -712,8 +761,13 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .hero__stats-bar .hero__stats {
   margin-bottom: 0;
   width: 100%;
-  max-width: 1000px;
+  max-width: 960px;
   justify-content: center;
+  padding: 12px 18px;
+}
+
+.hero__stats-bar .hero__stat {
+  padding: 12px 18px;
 }
 
 .hero__eyebrow {
