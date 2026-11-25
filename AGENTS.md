@@ -1,6 +1,6 @@
 # Instruções para agentes — site da Dra. Marcela Camargo
 
-Site estático (index.html, assets, css, js). Não há build nem Git remoto: a publicação vai direto para a Vercel da conta da Dra. Marcela pela CLI.
+Site estático (index.html, assets, css, js). Não há build. Código-fonte no GitHub: https://github.com/clinicamarcelacamargo-oss/sitedramarcelacamargo (remote `clinica`, branch `main`; enviar com `git push clinica master:main`). A Vercel não está ligada ao repositório: a publicação vai direto para a Vercel da conta da Dra. Marcela pela CLI, como abaixo. Depois de publicar, faça commit e push para manter o repositório igual ao que está no ar.
 
 ## Destino
 
