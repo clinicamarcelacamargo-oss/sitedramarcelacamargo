@@ -11,20 +11,34 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-/* ── Mobile menu ── */
-hamburger.addEventListener('click', () => {
-  const isOpen = hamburger.classList.toggle('open');
+/* ── Menu em tablets e celulares ── */
+const compactMenu = window.matchMedia('(max-width: 1200px)');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function setMobileMenu(isOpen) {
+  hamburger.classList.toggle('open', isOpen);
   nav.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  document.body.classList.toggle('menu-open', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
   hamburger.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+}
+
+hamburger.addEventListener('click', () => {
+  setMobileMenu(!nav.classList.contains('open'));
 });
 
-nav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    nav.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+compactMenu.addEventListener('change', () => setMobileMenu(false));
+
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape' || !nav.classList.contains('open')) return;
+  setMobileMenu(false);
+  hamburger.focus();
+});
+
+document.addEventListener('click', (event) => {
+  if (!nav.classList.contains('open')) return;
+  if (nav.contains(event.target) || hamburger.contains(event.target)) return;
+  setMobileMenu(false);
 });
 
 /* ── Scroll animations (Intersection Observer) ── */
@@ -64,11 +78,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
+    if (nav.classList.contains('open') && nav.contains(anchor)) {
+      setMobileMenu(false);
+      if (!target.hasAttribute('tabindex')) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    }
     const offset = header.offsetHeight + 8;
     const top    = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
   });
 });
+
+/* ── Navegação dos banners ── */
+(() => {
+  const track = document.getElementById('hero-banner-track');
+  const controls = document.querySelector('.hero-banners__controls');
+  if (!track || !controls) return;
+
+  const pages = Array.from(controls.querySelectorAll('[data-banner-page]'));
+
+  const currentPage = () => Math.round(track.scrollLeft / track.clientWidth);
+  const syncControls = () => {
+    const active = currentPage();
+    pages.forEach((button, index) => {
+      if (index === active) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+  };
+
+  const showPage = (index) => {
+    track.scrollLeft = index * track.clientWidth;
+    syncControls();
+  };
+
+  pages.forEach((button, index) => {
+    button.addEventListener('click', () => showPage(index));
+  });
+
+  controls.querySelectorAll('[data-banner-step]').forEach(button => {
+    button.addEventListener('click', () => {
+      const next = currentPage() + Number(button.dataset.bannerStep);
+      showPage((next + pages.length) % pages.length);
+    });
+  });
+
+  track.addEventListener('scroll', syncControls, { passive: true });
+  controls.hidden = false;
+})();
 
 /* ── Gallery Lightbox ── */
 const galleryItems  = document.querySelectorAll('.gallery__item');
@@ -138,6 +194,10 @@ function animateCounter(el) {
   const prefix   = el.dataset.prefix  || '';
   const suffix   = el.dataset.suffix  || '';
   const decimals = parseInt(el.dataset.decimals || 0, 10);
+  const format = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
   const duration = 1800;
   const steps    = 60;
   const increment = target / steps;
@@ -151,7 +211,7 @@ function animateCounter(el) {
       current = target;
       clearInterval(timer);
     }
-    el.textContent = prefix + current.toFixed(decimals) + suffix;
+    el.textContent = prefix + format.format(current) + suffix;
   }, duration / steps);
 }
 
@@ -164,7 +224,25 @@ const counterObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 const statsEl = document.querySelector('.hero__stats');
-if (statsEl) counterObserver.observe(statsEl);
+if (statsEl && !reducedMotion.matches) {
+  counterObserver.observe(statsEl);
+}
+
+/* Exibe o botão flutuante no celular quando as chamadas do topo saem da tela. */
+const heroBookingLinks = document.querySelectorAll('.hero-banners__track, .hero__actions');
+const whatsappButton = document.querySelector('.whatsapp-fab');
+
+if (whatsappButton && heroBookingLinks.length) {
+  const visibleBookingLinks = new Set();
+  const bookingLinksObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) visibleBookingLinks.add(entry.target);
+      else visibleBookingLinks.delete(entry.target);
+    });
+    whatsappButton.classList.toggle('whatsapp-fab--hero-visible', visibleBookingLinks.size > 0);
+  });
+  heroBookingLinks.forEach(link => bookingLinksObserver.observe(link));
+}
 
 /* ── Harmonização Facial: tabs ── */
 document.querySelectorAll('.harmonizacao__tab').forEach(tab => {
@@ -179,14 +257,6 @@ document.querySelectorAll('.harmonizacao__tab').forEach(tab => {
     if (panel) panel.classList.add('active');
   });
 });
-
-/* ── Scroll: hide hero scroll indicator ── */
-const scrollIndicator = document.querySelector('.hero__scroll-indicator');
-if (scrollIndicator) {
-  window.addEventListener('scroll', () => {
-    scrollIndicator.style.opacity = window.scrollY > 80 ? '0' : '1';
-  }, { passive: true });
-}
 
 /* ── Vídeo da seção Sobre: som ativo ao entrar na tela ── */
 (() => {
@@ -269,9 +339,11 @@ if (scrollIndicator) {
   };
 
   let ultimoFoco = null;
+  let tratamento = '';
 
-  const abrir = () => {
+  const abrir = (link) => {
     ultimoFoco = document.activeElement;
+    tratamento = link.dataset.waTreatment || '';
     modal.hidden = false;
     document.body.classList.add('unit-modal-open');
     const primeira = modal.querySelector('.unit-option');
@@ -289,14 +361,15 @@ if (scrollIndicator) {
     const link = e.target.closest('a[href*="wa.me"]');
     if (!link || link.hasAttribute('data-wa-direct')) return;
     e.preventDefault();
-    abrir();
+    abrir(link);
   });
 
   /* Escolha da unidade → abre o WhatsApp com a mensagem personalizada */
   modal.querySelectorAll('.unit-option').forEach(btn => {
     btn.addEventListener('click', () => {
       const unidade = btn.dataset.unidade;
-      const texto   = MENSAGENS[unidade] || MENSAGENS.Planalto;
+      const mensagem = MENSAGENS[unidade] || MENSAGENS.Planalto;
+      const texto = tratamento ? `${mensagem} Tenho interesse em ${tratamento}.` : mensagem;
       window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
       fechar();
     });
@@ -306,114 +379,4 @@ if (scrollIndicator) {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !modal.hidden) fechar();
   });
-})();
-
-/* ── Hero Carousel (Promoções & Destaques) ── */
-(() => {
-  const carousel = document.getElementById('heroCarousel');
-  if (!carousel) return;
-
-  const slides  = carousel.querySelectorAll('.hero-slide');
-  const dots    = carousel.querySelectorAll('.hero-carousel__dot');
-  const prevBtn = document.getElementById('heroPrevBtn');
-  const nextBtn = document.getElementById('heroNextBtn');
-  if (!slides.length) return;
-
-  let current = 0;
-  const total = slides.length;
-  const INTERVAL = 6000;
-  let timer = null;
-
-  const showSlide = (index) => {
-    current = (index + total) % total;
-
-    slides.forEach((slide, i) => {
-      const isActive = i === current;
-      slide.classList.toggle('hero-slide--active', isActive);
-      slide.setAttribute('aria-hidden', !isActive);
-    });
-
-    dots.forEach((dot, i) => {
-      const isActive = i === current;
-      dot.classList.toggle('active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-  };
-
-  const nextSlide = () => showSlide(current + 1);
-  const prevSlide = () => showSlide(current - 1);
-
-  const startAutoPlay = () => {
-    stopAutoPlay();
-    timer = setInterval(nextSlide, INTERVAL);
-  };
-
-  const stopAutoPlay = () => {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  };
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      startAutoPlay();
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      startAutoPlay();
-    });
-  }
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const idx = parseInt(dot.dataset.index, 10);
-      if (!isNaN(idx)) {
-        showSlide(idx);
-        startAutoPlay();
-      }
-    });
-  });
-
-  // Pausa ao passar o mouse ou focar
-  carousel.addEventListener('mouseenter', stopAutoPlay);
-  carousel.addEventListener('mouseleave', startAutoPlay);
-  carousel.addEventListener('focusin', stopAutoPlay);
-  carousel.addEventListener('focusout', startAutoPlay);
-
-  // Suporte a gesto de swipe (touch) no celular
-  let touchStartX = 0;
-  let touchEndX   = 0;
-
-  carousel.addEventListener('touchstart', e => {
-    stopAutoPlay();
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  carousel.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-    startAutoPlay();
-  }, { passive: true });
-
-  // Navegação por teclado
-  carousel.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') {
-      prevSlide();
-      startAutoPlay();
-    } else if (e.key === 'ArrowRight') {
-      nextSlide();
-      startAutoPlay();
-    }
-  });
-
-  startAutoPlay();
 })();

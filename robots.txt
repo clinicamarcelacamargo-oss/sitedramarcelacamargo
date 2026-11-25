@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.dramarcelacamargo.com.br/sitemap.xml
